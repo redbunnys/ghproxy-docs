@@ -81,7 +81,7 @@ const config: Config = {
           label: '文档',
         },
 
-        {to: '/about', label: 'About', position: 'right'},
+        // {to: '/about', label: 'About', position: 'right'},
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/WJQSERVER-STUDIO',
@@ -93,47 +93,26 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
+        // {
+        //   title: '社区',
+        //   items: [
+        //     {
+        //       label: 'TG群聊',
+        //       href: 'https://t.me/wjqserver_pro',
+        //     },
+        //     {
+        //       label: 'Discord',
+        //       href: 'https://discordapp.com/invite/docusaurus',
+        //     },
+        //     {
+        //       label: 'X',
+        //       href: 'https://x.com/docusaurus',
+        //     },
+        //   ],
+        // },
+
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()}  WJQSERVER-STUDIO团队所有,使用Docusaurus进行构建.`,
     },
     prism: {
       theme: prismThemes.github,

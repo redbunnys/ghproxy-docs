@@ -1,4 +1,5 @@
-## Hi there are WJQserver Studio👋
+# 关于我们
+##  WJQserver Studio👋
 
 WJQserver Studio是一个简单的小团体, 在兴趣和组织需求下构建项目
 

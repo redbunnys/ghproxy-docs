@@ -1,0 +1,8 @@
+{
+  "label": "smart-git",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "基于HertZ和Go-Git实现的git clone (smart http) 转发"
+  }
+}
