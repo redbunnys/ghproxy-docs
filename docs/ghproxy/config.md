@@ -422,3 +422,39 @@ root@root:/data/ghproxy$ ghproxy -h
     显示帮助信息
 - `-v`
     显示版本号
+
+## Docker GHCR等镜像代理支持
+
+> Version: 3.2.0 支持反代DockerHub等镜像仓库
+
+反代DockerHub
+```bash
+[docker]
+enabled = true
+target = "dockerhub" # ghcr/dockerhub or "xx.example.com"
+```
+反代ghcr.io
+```bash
+[docker]
+enabled = true
+target = "ghcr" # ghcr/dockerhub or "xx.example.com"
+```
+反代自定义地址(以docker.example.com为例子)
+```bash
+[docker]
+enabled = true
+target = "docker.example.com" # ghcr/dockerhub or "xx.example.com"
+```
+
+## 带宽速率限制
+
+> Version: 3.3.0 加入带宽限制功能 
+允许限制单个请求的带宽与程序总体的带宽
+```bash
+[rateLimit.bandwidthLimit]
+enabled = true
+totalLimit = "100mbps" # 程序总带宽限制
+totalBurst = "100mbps" # 令牌桶大小 (参看go rate标准库令牌桶原理)
+singleLimit = "10mbps" # 单个请求带宽限制
+singleBurst = "10mbps" # 令牌桶大小 (参看go rate标准库令牌桶原理)
+```
