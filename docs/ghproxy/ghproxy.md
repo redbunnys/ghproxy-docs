@@ -49,7 +49,7 @@ sidebar_position: 1
 
 ### 使用示例
 
-参看使用[使用示例](./proxy.md)
+参看[使用示例](./proxy.md)
 
 ## 部署说明
 

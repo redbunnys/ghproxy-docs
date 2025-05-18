@@ -1,8 +1,8 @@
 {
-  "label": "ghproxy",
+  "label": "Ghproxy",
   "position": 1,
   "link": {
     "type": "generated-index",
-    "description": "5 minutes to learn the most important Docusaurus concepts."
+    "description": "Ghproxy相关文档"
   }
 }
