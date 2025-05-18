@@ -27,7 +27,6 @@ wget -O install.sh https://raw.githubusercontent.com/WJQSERVER-STUDIO/ghproxy/ma
 1. 创建`data`文件路径
 ```bash
 mkdir -p /data/ghproxy/log
-mkdir -p /data/caddy/log
 mkdri -p /data/ghproxy/config
 ```
 2. 终端输入
@@ -98,56 +97,10 @@ services:
 
 
 ```bash
-[server]
-host = "0.0.0.0"  # 监听地址
-port = 8080  # 监听端口
-sizeLimit = 125 # 125MB
-H2C = true # 是否开启H2C传输 
-cors = "*" # "*"/"" -> "*" ; "nil" -> "" ; 除以上特殊情况, 会将值直接传入
-
-[httpc]
-mode = "auto" # "auto" or "advanced" HTTP客户端模式 自动/高级模式
-maxIdleConns = 100 # only for advanced mode 仅用于高级模式
-maxIdleConnsPerHost = 60 # only for advanced mode 仅用于高级模式
-maxConnsPerHost = 0 # only for advanced mode 仅用于高级模式
-
 [gitclone]
 mode = "cache" # bypass / cache 运行模式, cache模式依赖smart-git
 smartGitAddr = "http://smart-git:8080" # smart-git组件地址
-ForceH2C = false # 强制使用H2C连接(实验性, 可配置为true)
-
-[pages]
-mode = "internal" # "internal" or "external" 内部/外部 前端 默认内部
-theme = "bootstrap" # "bootstrap" or "nebula" 内置主题
-staticPath = "/data/www"  # 外部静态页面文件路径
-
-[log]
-logFilePath = "/data/ghproxy/log/ghproxy.log" # 日志文件路径
-maxLogSize = 5 # MB 日志文件最大大小
-level = "info"  # 日志级别 dump, debug, info, warn, error, none
-
-[auth]
-enabled = false  # 是否开启鉴权
-authMethod = "parameters" # 鉴权方式,支持parameters,header
-authToken = "token"  # 鉴权Token
-
-[blacklist]
-blacklistFile = "/data/ghproxy/config/blacklist.json"  # 黑名单文件路径
-enabled = false  # 是否开启黑名单
-
-[whitelist]
-enabled = false  # 是否开启白名单
-whitelistFile = "/data/ghproxy/config/whitelist.json"  # 白名单文件路径
-
-[rateLimit]
-enabled = false  # 是否开启速率限制
-rateMethod = "total" # "ip" or "total" 速率限制方式
-ratePerMinute = 180  # 每分钟限制请求数量
-burst = 5  # 突发请求数量
-
-[outbound]
-enabled = false # 是否使用自定义代理出站
-url = "socks5://127.0.0.1:1080" # "http://127.0.0.1:7890" 支持Socks5/HTTP(S)出站传输
+ForceH2C = false # 强制使用H2C连接(可配置为true)
 ```
 
 ### 4. 修改`/root/data/docker_data/ghproxy/smart-git/config/config.toml`(可选)

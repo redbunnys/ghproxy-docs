@@ -4,12 +4,9 @@ sidebar_position: 4
 
 # 配置说明
 
-
-###  项目配置文档
-
 `ghproxy` 的配置主要通过修改 `config` 目录下的 `config.toml`、`blacklist.json` 和 `whitelist.json` 文件来实现。本文档将详细介绍这些配置文件的作用以及用户可以自定义的配置选项。
 
-### `config.toml` - 主配置文件
+## `config.toml` - 主配置文件
 
 `config.toml` 是 `ghproxy` 的主配置文件，采用 TOML 格式。您可以通过修改此文件来定制 `ghproxy` 的各项功能，例如服务器端口、连接设置、Git 克隆模式、日志级别、认证方式、黑白名单以及限速策略等。
 
@@ -75,13 +72,20 @@ rateMethod = "total" # "ip" or "total"
 ratePerMinute = 180
 burst = 5
 
+[rateLimit.bandwidthLimit]
+	enabled = false
+	totalLimit = "100mbps"
+	totalBurst = "100mbps"
+	singleLimit = "10mbps"
+	singleBurst = "10mbps"
+
 [outbound]
 enabled = false
 url = "socks5://127.0.0.1:1080" # "http://127.0.0.1:7890"
 
 [docker]
 enabled = false
-target = "ghcr" # ghcr/dockerhub
+target = "ghcr" # ghcr/dockerhub or "xx.example.com"
 ```
 
 ### 配置项详细说明
@@ -298,6 +302,27 @@ target = "ghcr" # ghcr/dockerhub
         *   类型: 整数 (`int`)
         *   默认值: `5`
         *   说明:  允许在短时间内超过 `ratePerMinute` 的突发请求数。
+    *   **`[rateLimit.bandwidthLimit]` 带宽速率限制**
+        *   `enabled`: 是否启用带宽速率限制。
+            *   类型: 布尔值 (`bool`)
+            *   默认值: `false` (禁用)
+            *   说明: 启用后，`ghproxy` 将根据配置的策略限制带宽使用，防止服务被滥用。
+        *   `totalLimit`: 全局带宽限制。
+            *   类型: 字符串 (`string`)
+            *   默认值: `"100mbps"`
+            *   说明: 设置全局最大带宽使用量。支持的单位有 "kbps", "mbps", "gbps"。
+        *   `totalBurst`: 全局突发带宽。
+            *   类型: 字符串 (`string`)
+            *   默认值: `"100mbps"`
+            *   说明: 设置全局突发带宽使用量。支持的单位有 "kbps", "mbps", "gbps"。
+        *   `singleLimit`: 单个连接带宽限制。
+            *   类型: 字符串 (`string`)
+            *   默认值: `"10mbps"`
+            *   说明: 设置单个连接的最大带宽使用量。支持的单位有 "kbps", "mbps", "gbps"。
+        *   `singleBurst`: 单个连接突发带宽。
+            *   类型: 字符串 (`string`)
+            *   默认值: `"10mbps"`
+            *   说明: 设置单个连接的突发带宽使用量。支持的单位有 "kbps", "mbps", "gbps"。
 
 *   **`[outbound]` - 出站代理配置**
 
@@ -325,8 +350,9 @@ target = "ghcr" # ghcr/dockerhub
         *   说明: 指定要代理的 Docker 注册表。
             *   `"ghcr"`: 代理 GitHub Container Registry (ghcr.io)。
             *   `"dockerhub"`: 代理 Docker Hub (docker.io)。
+            *   自定义, 支持传入自定义target, 例如`"docker.example.com"`
 
-### `blacklist.json` - 黑名单配置
+## `blacklist.json` - 黑名单配置
 
 `blacklist.json` 文件用于配置黑名单规则，阻止对特定用户或仓库的访问。
 
@@ -348,7 +374,7 @@ target = "ghcr" # ghcr/dockerhub
     *   **通配符**: 例如 `"malwareuser/*"`，使用 `*` 通配符，阻止访问 `malwareuser` 用户下的所有仓库。
     *   **缩略写法**: 例如 `"example"`, 等同于 `"example/*"`， 允许访问 `example` 用户下的所有仓库。
 
-### `whitelist.json` - 白名单配置
+## `whitelist.json` - 白名单配置
 
 `whitelist.json` 文件用于配置白名单规则，只允许访问白名单中指定的用户或仓库。白名单的优先级高于黑名单，如果一个请求同时匹配黑名单和白名单，则白名单生效，请求将被允许。
 
@@ -371,7 +397,6 @@ target = "ghcr" # ghcr/dockerhub
     *   **通配符**: 例如 `"example/*"`，使用 `*` 通配符，允许访问 `example` 用户下的所有仓库。
     *   **缩略写法**: 例如 `"example"`, 等同于 `"example/*"`， 允许访问 `example` 用户下的所有仓库。
 
----
 
 ### 程序Flag参数说明
 

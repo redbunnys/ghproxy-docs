@@ -31,6 +31,7 @@ https://example.com/https://raw.githubusercontent.com/username/repo/main/file.tx
 
 ## Docker镜像加速
 
+假设本项目使用`gh.example.com`作为域名
 
 ### 1. 加速器配置
 在 `/etc/docker/daemon.json` 文件中， registry-mirrors 部分，请将代理地址替换为你搭建的 实际地址。
@@ -39,8 +40,7 @@ https://example.com/https://raw.githubusercontent.com/username/repo/main/file.tx
 
 ```bash
 cat > /etc/docker/daemon.json <"],
-  "insecure-registries": ["docker.gh-proxy.com"],
-  "exec-opts": ["native.cgroupdriver=systemd"]
+  "insecure-registries": ["gh.example.com"],
 }
 EOF
 ```
@@ -51,7 +51,7 @@ systemctl daemon-reload && systemctl restart docker
 ```
 ### 2. 拉取测试
 
->📢 注意事项： 若配置了加速器地址，并且镜像源于 Docker Hub 时，可以无需加上域名前缀，其他镜像源站必须加上前缀。
+>📢 注意事项： 请注意target配置的目标
 源于 Docker Hub 镜像地址： cleverest/crproxy 与 adguard/adguardhome ，则
 
 ####  1. 直接拉取
@@ -62,37 +62,6 @@ docker pull adguard/adguardhome
 #### 2. 前缀拉去
 
 ```bash
-docker pull docker.gh-proxy.com/cleverest/crproxy
-docker pull docker.gh-proxy.com/adguard/adguardhome
-
-docker pull docker.gh-proxy.com/docker.io/cleverest/crproxy
-docker pull docker.gh-proxy.com/docker.io/adguard/adguardhome
-```
-
-拉取 非Docker Hub 平台镜像时， 必须加域名前缀，各个知名镜像站拉取测试，如下：
-
-```bash
-# Google
-docker pull docker.gh-proxy.com/gcr.io/kaniko-project/executor:debug
-
-# GitHub
-docker pull docker.gh-proxy.com/ghcr.io/openfaas/queue-worker
-
-# Kubernetes
-docker pull docker.gh-proxy.com/k8s.gcr.io/etcd:3.5.7-0
-
-# 新Kubernetes
-docker pull docker.gh-proxy.com/registry.k8s.io/kube-apiserver:v1.30.0
-
-# Red Hat
-docker pull docker.gh-proxy.com/quay.io/calico/cni
-
-# Microsoft
-docker pull docker.gh-proxy.com/mcr.microsoft.com/powershell
-
-# Elastic
-docker pull docker.gh-proxy.com/docker.elastic.co/elasticsearch/elasticsearch:8.1.0
-
-# NVIDIA
-docker pull docker.gh-proxy.com/nvcr.io/nvidia/cuda:12.1.0-runtime-ubuntu20.04
+docker pull gh.example.com/cleverest/crproxy
+docker pull gh.example.com/adguard/adguardhome
 ```
