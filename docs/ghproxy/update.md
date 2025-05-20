@@ -4,6 +4,10 @@ sidebar_position: 5
 
 # 更新日志
 
+3.3.3 - 2025-05-20
+---
+- CHANGE: 加入senseClientDisconnection与async配置项
+
 3.3.2 - 2025-05-18
 ---
 - CHANGE: 默认主题改为`design`
