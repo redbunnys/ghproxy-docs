@@ -458,3 +458,4 @@ totalBurst = "100mbps" # 令牌桶大小 (参看go rate标准库令牌桶原理)
 singleLimit = "10mbps" # 单个请求带宽限制
 singleBurst = "10mbps" # 令牌桶大小 (参看go rate标准库令牌桶原理)
 ```
+
