@@ -59,9 +59,36 @@ systemctl daemon-reload && systemctl restart docker
 docker pull cleverest/crproxy
 docker pull adguard/adguardhome
 ```
-#### 2. 前缀拉去
+#### 2. 前缀拉取 (以"gh.example.com"演示)
 
 ```bash
-docker pull gh.example.com/cleverest/crproxy
+docker pull gh.example.com/wjqserver/ghproxy
 docker pull gh.example.com/adguard/adguardhome
+
+docker pull gh.example.com/docker.io/wjqserver/ghproxy
+docker pull gh.example.com/docker.io/adguard/adguardhome
+
+# Google
+docker pull gh.example.com/gcr.io/kaniko-project/executor:debug
+
+# GitHub
+docker pull gh.example.com/ghcr.io/openfaas/queue-worker
+
+# Kubernetes
+docker pull gh.example.com/k8s.gcr.io/etcd:3.5.7-0
+
+# 新Kubernetes
+docker pull gh.example.com/registry.k8s.io/kube-apiserver:v1.30.0
+
+# Red Hat
+docker pull gh.example.com/quay.io/calico/cni
+
+# Microsoft
+docker pull gh.example.com/mcr.microsoft.com/powershell
+
+# Elastic
+docker pull gh.example.com/docker.elastic.co/elasticsearch/elasticsearch:8.1.0
+
+# NVIDIA
+docker pull gh.example.com/nvcr.io/nvidia/cuda:12.1.0-runtime-ubuntu20.04
 ```

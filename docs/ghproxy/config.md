@@ -17,6 +17,7 @@ sidebar_position: 4
 host = "0.0.0.0"
 port = 8080
 netlib = "netpoll" # "netpoll" / "std" "standard" "net/http" "net"
+senseClientDisconnection = false
 sizeLimit = 125 # MB
 memLimit = 0 # MB
 H2C = true
@@ -48,6 +49,7 @@ staticDir = "/data/www"
 logFilePath = "/data/ghproxy/log/ghproxy.log"
 maxLogSize = 5 # MB
 level = "info" # dump, debug, info, warn, error, none
+async = false
 hertzLogPath = "/data/ghproxy/log/hertz.log"
 
 [auth]
@@ -104,6 +106,10 @@ target = "ghcr" # ghcr/dockerhub or "xx.example.com"
         *   类型: 字符串 (`string`)
         *   默认值: `""` (HertZ默认处置)
         *   说明: `"std"` `"standard"` `"net/http"` `"net"` 均会被设置为go标准库`net/http`, 设置为`"netpoll"`或`""`会由`HertZ`默认逻辑处理
+    *   `senseClientDisconnection`: `HertZ`框架检测客户端断开
+        *   类型: `bool`
+        *   默认值: `false`
+        *   说明: `HertZ`框架提供的客户端断开感知功能, 仅在`netlib`为`netpoll`时作用
     *   `sizeLimit`: 请求体大小限制。
         *   类型: 整数 (`int`)
         *   默认值: `125` (MB)
@@ -224,6 +230,10 @@ target = "ghcr" # ghcr/dockerhub or "xx.example.com"
             *   `"warn"`:   输出警告和错误日志。
             *   `"error"`:  仅输出错误日志。
             *   `"none"`:   禁用所有日志输出。
+    *   `async`: 异步
+        *   类型: `bool`
+        *   默认值: `false`
+        *   说明: 是否开启日志库的异步写入模式
     *   `hertzLogPath`:  `HertZ`日志文件路径。
         *   类型: 字符串 (`string`)
         *   默认值: `"/data/ghproxy/log/hertz.log"`
