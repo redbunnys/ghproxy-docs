@@ -32,9 +32,6 @@ sidebar_position: 1
 - 🐚 **支持 shell 脚本多层嵌套加速**
 
 
-
-
-
 ### 项目相关
 
 [DEMO](https://ghproxy.1888866.xyz)
